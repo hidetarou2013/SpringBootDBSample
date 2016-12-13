@@ -4,6 +4,7 @@ package com.example.cassandra.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
@@ -99,7 +100,7 @@ public class MemoBoxCassandraController {
 
 	@RequestMapping(value = "/MemoBoxCassandra/editId", method = RequestMethod.POST)
 	public ModelAndView editId(
-			@RequestParam("id") String id,
+			@RequestParam("id") UUID id,
 			ModelAndView mav){
 		System.out.println("editId:POST:" + id);
 		mav.setViewName("edit_MemoBoxCassandra");
@@ -113,7 +114,7 @@ public class MemoBoxCassandraController {
 	@RequestMapping(value = "/MemoBoxCassandra/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView edit(
 //			@ModelAttribute("formModel") MyData mydata,
-			@PathVariable String id,
+			@PathVariable UUID id,
 			ModelAndView mav){
 		mav.setViewName("edit_MemoBoxCassandra");
 		mav.addObject("msg", "This Is Sample Spring Boot JPA Model MemoBox Modify");
@@ -126,7 +127,7 @@ public class MemoBoxCassandraController {
 	@RequestMapping(value = "/MemoBoxCassandra/edit", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView update(
-			@RequestParam("id") String id,
+			@RequestParam("id") UUID id,
 			@RequestParam("name") String name,
 			@RequestParam("memo") String memo,
 			ModelAndView mav){
@@ -144,7 +145,7 @@ public class MemoBoxCassandraController {
 
 	@RequestMapping(value = "/MemoBoxCassandra/deleteId", method = RequestMethod.POST)
 	public ModelAndView deleteId(
-			@RequestParam("id") String id,
+			@RequestParam("id") UUID id,
 			ModelAndView mav){
 		System.out.println("deleteId:POST:" + id);
 		System.out.println("削除予定：");
@@ -171,11 +172,11 @@ public class MemoBoxCassandraController {
 	@RequestMapping(value = "/MemoBoxCassandra/delete", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView remove(
-			@RequestParam("id") String id,
+			@RequestParam("id") UUID id,
 			ModelAndView mav){
 		System.out.println("remove id:" + id);
 		mav.setViewName("index_MemoBoxCassandra");
-		if( id == ""){
+		if( id.toString() == ""){
 			mav = new ModelAndView("redirect:/MemoBoxCassandra/delete");
 		}else{
 			mav.addObject("title", "Find Result");
