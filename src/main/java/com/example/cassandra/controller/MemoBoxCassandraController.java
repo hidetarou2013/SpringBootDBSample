@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.cassandra.entity.MemoBox;
-import com.example.cassandra.repository.MemoBoxRepository;
+import com.example.cassandra.repository.MemoBoxRepository2;
 
 
 /**
@@ -42,7 +42,7 @@ public class MemoBoxCassandraController {
 	}
 
 	@Autowired
-	MemoBoxRepository repository;
+	private MemoBoxRepository2 repository;
 
 	@RequestMapping(value = "/MemoBoxCassandra", method = RequestMethod.GET)
 	public ModelAndView index(
