@@ -60,7 +60,9 @@ public class DepartmentsCassandraController {
 			@RequestParam("department_id") int department_id,
 			@RequestParam("department_name") String department_name,
 			ModelAndView mav){
-		Departments mydata = new Departments(department_id,department_name);
+		Departments mydata = new Departments();
+		mydata.setDepartment_id(department_id);
+		mydata.setDepartment_name(department_name);
 		repository.save(mydata);
 		return new ModelAndView("redirect:/DepartmentsCassandra");
 	}

@@ -22,10 +22,10 @@ public class Departments {
 	@Column(value = "department_name")
 	private String department_name;
 
-	public Departments(int department_id,String department_name){
-		this.department_id = department_id;
-		this.department_name = department_name;
-	}
+//	public Departments(int department_id,String department_name){
+//		this.department_id = department_id;
+//		this.department_name = department_name;
+//	}
 
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="department_id",insertable=false,updatable=false)
