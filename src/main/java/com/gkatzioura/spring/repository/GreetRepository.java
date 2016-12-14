@@ -12,4 +12,7 @@ public interface GreetRepository extends CassandraRepository<Greeting> {
     Iterable<Greeting> findByUser(String user,Integer limit);
     @Query("SELECT*FROM greetings WHERE user=?0 AND id<?1 LIMIT ?2")
     Iterable<Greeting> findByUserFrom(String user,UUID from,Integer limit);
+
+    @Query("SELECT*FROM greetings WHERE user=?0 AND id=?1 LIMIT ?2")
+    Iterable<Greeting> findByUserId(String user,UUID id,Integer limit);
 }
