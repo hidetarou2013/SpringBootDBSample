@@ -12,13 +12,16 @@ import com.example.cassandra.entity.MemoBox;
 @Repository
 public interface MemoBoxRepository2 extends CassandraRepository<MemoBox> {
 
-	@Query("SELECT * FROM memobox WHERE name=?")
+	@Query("SELECT * FROM memobox WHERE name=?0")
 	public List<MemoBox> findByName(String s);
-	@Query("SELECT * FROM memobox WHERE id=?")
+
+	@Query("SELECT * FROM memobox WHERE id=?0")
 	public MemoBox findById(UUID s);
-	@Query("DELETE FROM memobox WHERE name=?")
+
+	@Query("DELETE FROM memobox WHERE name=?0")
 	public List<MemoBox> deleteByName(String s);
-	@Query("DELETE FROM memobox id=?")
+
+	@Query("DELETE FROM memobox WHERE id=?0")
 	public List<MemoBox> deleteById(UUID s);
 
 //    @Query("SELECT * FROM memobox WHERE name=?0 LIMIT ?1")
