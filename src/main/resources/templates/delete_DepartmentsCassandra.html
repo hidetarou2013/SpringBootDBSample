@@ -24,7 +24,7 @@ td {padding:5px; color:black; background:#e0e0ff}
 	<hr />
 	<table>
 		<form method="post" action="/DepartmentsCassandra/delete"  th:object="${formModel}">
-		<input type="hidden" name="id" th:value="*{id}" />
+		<input type="hidden" name="department_id" th:value="*{department_id}" />
 		<tr>
 			<td><label for="delete">削除</label></td>
 			<!-- <td><input type="text" name="department_id" id="department_id" th:value="*{department_id}"  /></td> -->

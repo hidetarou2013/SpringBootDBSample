@@ -1,11 +1,8 @@
 package com.example.cassandra.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+//import javax.persistence.FetchType;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.OneToMany;
 
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
@@ -22,22 +19,23 @@ public class Departments {
 	@Column(value = "department_name")
 	private String department_name;
 
+	// コンストラクタを設定すると、repository.findAll();できなくなる。
 //	public Departments(int department_id,String department_name){
 //		this.department_id = department_id;
 //		this.department_name = department_name;
 //	}
 
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="department_id",insertable=false,updatable=false)
-	private List<Employees> emp = new ArrayList<Employees>();
-
-	public List<Employees> getEmp() {
-		return emp;
-	}
-
-	public void setEmp(List<Employees> emp) {
-		this.emp = emp;
-	}
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinColumn(name="department_id",insertable=false,updatable=false)
+//	private List<Employees> emp = new ArrayList<Employees>();
+//
+//	public List<Employees> getEmp() {
+//		return emp;
+//	}
+//
+//	public void setEmp(List<Employees> emp) {
+//		this.emp = emp;
+//	}
 
 	/**
 	 * department_idを取得します。
