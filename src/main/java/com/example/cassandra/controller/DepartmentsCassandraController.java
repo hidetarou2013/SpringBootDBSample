@@ -135,7 +135,6 @@ public class DepartmentsCassandraController {
 		mydata.setDepartment_name(department_name);
 		mydata.setDepartment_id(department_id);
 		repository.save(mydata);
-		System.out.println("bbb：");
 		mav.addObject("formModel", null);
 		return new ModelAndView("redirect:/DepartmentsCassandra");
 	}

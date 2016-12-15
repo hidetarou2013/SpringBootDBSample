@@ -143,7 +143,6 @@ public class EmployeesCassandraController {
 		mydata.setEmployee_phone(employee_phone);
 		mydata.setEmployee_email(employee_email);
 		repository.save(mydata);
-		System.out.println("bbb：");
 		mav.addObject("formModel", null);
 		return new ModelAndView("redirect:/EmployeesCassandra");
 	}
