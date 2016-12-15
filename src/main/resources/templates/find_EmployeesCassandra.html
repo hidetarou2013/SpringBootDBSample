@@ -19,11 +19,11 @@ td {padding:5px; color:black; background:#e0e0ff}
 </style>
 </head>
 <body>
-	<h1 th:text="${title}">DepartmentsCassandra Find Page</h1>
+	<h1 th:text="${title}">EmployeesCassandra Find Page</h1>
 	<p class="msg" th:text="${msg}" >please wait ...</p>
 	<hr />
 	<table>
-		<form method="post" action="/DepartmentsCassandra/find" >
+		<form method="post" action="/EmployeesCassandra/find" >
 		<tr>
 			<td><label for="find">検索</label></td>
 			<td><input type="text" name="find" id="find" size="20" th:value="${value}" /></td>
@@ -38,10 +38,14 @@ td {padding:5px; color:black; background:#e0e0ff}
 		<tr>
 			<th>ID</th>
 			<th>名前</th>
+			<th>電話番号</th>
+			<th>email</th>
 		</tr>
 		<tr th:each="obj : ${datalist}">
-			<td th:text="${obj.department_id}"></td>
-			<td th:text="${obj.department_name}"></td>
+			<td th:text="${obj.employee_id}"></td>
+			<td th:text="${obj.employee_name}"></td>
+			<td th:text="${obj.employee_phone}"></td>
+			<td th:text="${obj.employee_email}"></td>
 		</tr>
 	</table>
 

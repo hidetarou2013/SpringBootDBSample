@@ -1,8 +1,5 @@
 package com.example.cassandra.entity;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
@@ -27,16 +24,16 @@ public class Employees {
 	private int department_id;
 
 	// add
-	@OneToOne
-	@JoinColumn(name="department_id", insertable=false, updatable=false)
-	private Departments dept;
-
-	public Departments getDept() {
-		return dept;
-	}
-	public void setDept(Departments dept) {
-		this.dept = dept;
-	}
+//	@OneToOne
+//	@JoinColumn(name="department_id", insertable=false, updatable=false)
+//	private Departments dept;
+//
+//	public Departments getDept() {
+//		return dept;
+//	}
+//	public void setDept(Departments dept) {
+//		this.dept = dept;
+//	}
 	public int getEmployee_id() {
 		return employee_id;
 	}
