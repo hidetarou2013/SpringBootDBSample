@@ -20,6 +20,18 @@ public class Greeting {
     private String greet;
     @Column(value = "creation_date")
     private Date creationDate;
+
+    public Greeting(){
+
+    }
+
+    public Greeting(String user,String greet,Date creationDate){
+    	this.user = user;
+    	this.greet = greet;
+    	this.creationDate = creationDate;
+    }
+
+
     public UUID getId() {
         return id;
     }

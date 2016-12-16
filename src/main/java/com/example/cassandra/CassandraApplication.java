@@ -1,5 +1,7 @@
 package com.example.cassandra;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,9 +10,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.example.cassandra.entity.Departments;
 import com.example.cassandra.entity.Employees;
+import com.example.cassandra.entity.Greeting;
 import com.example.cassandra.entity.MemoBox;
 import com.example.cassandra.repository.DepartmentsRepository;
 import com.example.cassandra.repository.EmployeesRepository;
+import com.example.cassandra.repository.GreetingRepository;
 import com.example.cassandra.repository.MemoBoxRepository2;
 
 /**
@@ -18,6 +22,7 @@ import com.example.cassandra.repository.MemoBoxRepository2;
  *
  * [改変履歴]
  * refs #2 [add][2016-12-16] CassandraApplicationをimplements CommandLineRunnerし、初期データ投入処理を加えた。
+ * refs #2 [add][2016-12-16] Greeting Table 初期データ投入処理を加えた。cassandra用のDDL添付した。
  *
  * @author maekawa
  *
@@ -38,6 +43,9 @@ public class CassandraApplication implements CommandLineRunner  {
 	@Autowired
 	private EmployeesRepository employeesRepository;
 
+	@Autowired
+	private GreetingRepository greetRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -47,10 +55,20 @@ public class CassandraApplication implements CommandLineRunner  {
 
     	initDataEmployees();
 
-
+    	initDataGreeting();
     }
 
-    /**
+	/**
+     * 初期データ投入処理：Greeting
+     */
+    private void initDataGreeting() {
+		// TODO 自動生成されたメソッド・スタブ
+    	this.greetRepository.deleteAll();
+    	this.greetRepository.save(new Greeting("Taro Yamada","hello 1",new Date()));
+    	this.greetRepository.save(new Greeting("Kenichi Suzuki","hello 2",new Date()));
+	}
+
+	/**
      * 初期データ投入処理：Employees
      */
 	private void initDataEmployees() {
