@@ -28,7 +28,6 @@
 		 <dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-cassandra</artifactId>
-			<version>1.4.2.RELEASE</version>
 		</dependency>
 		<!--
 		<dependency>

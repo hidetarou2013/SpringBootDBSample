@@ -23,6 +23,18 @@ public class Employees {
 	@Column(value = "department_id")
 	private int department_id;
 
+	public Employees(){
+
+	}
+
+	public Employees(int employee_id,String employee_name,String employee_phone,String employee_email,int department_id){
+		this.employee_id = employee_id;
+		this.employee_name = employee_name;
+		this.employee_phone = employee_phone;
+		this.employee_email = employee_email;
+		this.department_id = department_id;
+	}
+
 	// add
 //	@OneToOne
 //	@JoinColumn(name="department_id", insertable=false, updatable=false)
