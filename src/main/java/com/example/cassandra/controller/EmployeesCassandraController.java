@@ -2,10 +2,13 @@ package com.example.cassandra.controller;
 
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.cassandra.entity.Departments;
 import com.example.cassandra.entity.Employees;
+import com.example.cassandra.form.EmployeesJOIN;
+import com.example.cassandra.repository.DepartmentsRepository;
 import com.example.cassandra.repository.EmployeesRepository;
 
 
@@ -43,6 +49,9 @@ public class EmployeesCassandraController {
 	@Autowired
 	private EmployeesRepository repository;
 
+	@Autowired
+	private DepartmentsRepository repositoryDep;
+
 	@RequestMapping(value = "/EmployeesCassandra", method = RequestMethod.GET)
 	public ModelAndView index(
 			ModelAndView mav){
@@ -51,6 +60,38 @@ public class EmployeesCassandraController {
 		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Employees Register");
 		Iterable<Employees> list = repository.findAll();
 		mav.addObject("datalist", list);
+		return mav;
+	}
+
+	@RequestMapping(value = "/EmployeesCassandraJOIN", method = RequestMethod.GET)
+	public ModelAndView indexJOIN(
+			ModelAndView mav){
+		mav.setViewName("index_EmployeesCassandraJOIN");
+		mav.addObject("title", "Find Page");
+		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Employees Register");
+		Iterable<Employees> list = repository.findAll();
+		Iterable<Departments> listDep = repositoryDep.findAll();
+
+		List<EmployeesJOIN> listJOIN = new ArrayList<EmployeesJOIN>();
+		list.forEach(
+			(k) -> {
+				EmployeesJOIN e = new EmployeesJOIN();
+				BeanUtils.copyProperties(k, e);
+				String name = "";
+				Iterator<Departments> ite = listDep.iterator();
+				while(ite.hasNext()){
+					Departments dep = ite.next();
+					if(dep.getDepartment_id() == e.getDepartment_id()){
+						name = dep.getDepartment_name();
+						break;
+					}
+				}
+				e.setDepartment_name(name);
+				listJOIN.add(e);
+			}
+		);
+
+		mav.addObject("datalist", listJOIN);
 		return mav;
 	}
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8"></meta>
+<title>Employees Page</title>
+<style>
+// CSS
+h1 {font-size:18pt; font-weight:bold; color:gray;}
+body {font-size:13pt; color:gray; margin:5px 25px;}
+pre {border: solid 3px #ddd; padding: 10px;}
+tr {margin:5px}
+th {padding:5px;color:white; background:darkgray}
+td {padding:5px; color:black; background:#e0e0ff}
+.right_td {padding: 5px; color: black; background: #e0e0ff; text-align: right}
+.center_td {padding: 5px; color: black; background: #e0e0ff; text-align: center}
+.right_red   {padding: 5px; color: red; background: #e0e0ff; text-align: right}
+.right_blue  {padding: 5px; color: blue; background: #e0e0ff; text-align: right}
+.msg {font-size:15pt; color:green; margin:5px 25px;}
+</style>
+</head>
+<body>
+	<h1 th:text="#{content.title.cassandra}">EmployeesCassandra Page</h1>
+	<p class="msg" th:text="${msg}" >please wait ...</p>
+	<hr />
+	<table>
+		<form method="post" action="/EmployeesCassandra/form" >
+		<tr>
+			<td><label for="employee_id">ID</label></td>
+			<td><input type="text" name="employee_id" id="employee_id" /></td>
+		</tr>
+		<tr>
+			<td><label for="employee_name">社員名</label></td>
+			<td><input type="text" name="employee_name" id="employee_name" /></td>
+		</tr>
+		<tr>
+			<td><label for="employee_phone">電話番号</label></td>
+			<td><input type="text" name="employee_phone" id="employee_phone" /></td>
+		</tr>
+		<tr>
+			<td><label for="employee_email">email</label></td>
+			<td><input type="text" name="employee_email" id="employee_email" /></td>
+		</tr>
+		<tr>
+			<td><label for="department_id">部署ID</label></td>
+			<td><input type="text" name="department_id" id="department_id" /></td>
+		</tr>
+		<tr><td class="right_blue"></td><td class="right_td"><input type="submit"  /></td></tr>
+		</form>
+	</table>
+
+	<hr />
+	<pre th:text="${datalist}"></pre>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>社員名</th>
+			<th>電話番号</th>
+			<th>email</th>
+			<th>部署ID</th>
+			<th>部署名称</th>
+			<th>変更</th>
+			<th>削除</th>
+		</tr>
+		<tr th:each="obj : ${datalist}">
+			<td th:text="${obj.employee_id}"></td>
+			<td th:text="${obj.employee_name}"></td>
+			<td th:text="${obj.employee_phone}"></td>
+			<td th:text="${obj.employee_email}"></td>
+			<td th:text="${obj.department_id}"></td>
+			<td th:text="${obj.department_name}"></td>
+			<td><form method="post" action="/EmployeesCassandra/editId" ><input type="hidden" name="employee_id" th:value="${obj.employee_id}" /><input type="submit" value="edit" /></form></td>
+			<td><form method="post" action="/EmployeesCassandra/deleteId" ><input type="hidden" name="employee_id" th:value="${obj.employee_id}" /><input type="submit" value="delete" /></form></td>
+		</tr>
+	</table>
+
+	<script>
+
+	</script>
+</body>
+</html>
