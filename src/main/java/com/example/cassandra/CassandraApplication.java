@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import com.example.cassandra.entity.Departments;
 import com.example.cassandra.entity.Employees;
 import com.example.cassandra.entity.Greeting;
-import com.example.cassandra.entity.MemoBox;
 import com.example.cassandra.repository.DepartmentsRepository;
 import com.example.cassandra.repository.EmployeesRepository;
 import com.example.cassandra.repository.GreetingRepository;
@@ -49,13 +48,13 @@ public class CassandraApplication implements CommandLineRunner  {
     @Override
     public void run(String... args) throws Exception {
 
-    	initDataMemoBox();
+//    	initDataMemoBox();
 
-    	initDataDepartments();
+//    	initDataDepartments();
 
-    	initDataEmployees();
+//    	initDataEmployees();
 
-    	initDataGreeting();
+//    	initDataGreeting();
     }
 
 	/**
@@ -96,7 +95,7 @@ public class CassandraApplication implements CommandLineRunner  {
      */
 	private void initDataMemoBox() {
 		this.memoBoxRepository.deleteAll();
-    	this.memoBoxRepository.save(new MemoBox("tanaka1","memo1"));
-    	this.memoBoxRepository.save(new MemoBox("tanaka2","memo2"));
+//    	this.memoBoxRepository.save(new MemoBox("tanaka1","memo1"));
+//    	this.memoBoxRepository.save(new MemoBox("tanaka2","memo2"));
 	}
 }
