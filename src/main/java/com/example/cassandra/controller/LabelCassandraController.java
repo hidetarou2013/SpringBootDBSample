@@ -101,9 +101,9 @@ public class LabelCassandraController {
 	@RequestMapping(value = "/LabelCassandra/form", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView form(
-			@RequestParam(" kigyou_cd")       String    kigyou_cd,
-			@RequestParam(" label_id")        int       label_id,
-			@RequestParam(" label_name")      String    label_name,
+			@RequestParam("kigyou_cd")       String    kigyou_cd,
+			@RequestParam("label_id")        int       label_id,
+			@RequestParam("label_name")      String    label_name,
 			@RequestParam("parent_label_id")  int       parent_label_id,
 			ModelAndView mav){
 		Label mydata = new Label();
