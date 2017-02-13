@@ -19,7 +19,7 @@ import org.springframework.data.cassandra.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
 @Configuration
-@PropertySource(value = {"classpath:META-INF/cassandra_keyspaceA.properties"})
+@PropertySource(value = {"classpath:META-INF/cassandra_keyspaceG.properties"})
 @EnableCassandraRepositories(basePackages = {"com.example.cassandra"})
 public class CassandraConfig {
 	@Autowired

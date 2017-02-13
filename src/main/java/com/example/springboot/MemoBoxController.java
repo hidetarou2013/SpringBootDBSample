@@ -64,6 +64,17 @@ public class MemoBoxController {
 		return new ModelAndView("redirect:/MemoBox");
 	}
 
+
+//	@RequestMapping(value = "/LabelCassandra", method = RequestMethod.GET)
+//	public ModelAndView index1(
+//			ModelAndView mav){
+//		mav.setViewName("index_MemoBox");
+//		mav.addObject("title", "Find Page");
+//		mav.addObject("msg", "This Is Sample Spring Boot JPA Model MemoBox Register");
+//		Iterable<MemoBox> list = repository.findAll();
+//		mav.addObject("datalist", list);
+//		return mav;
+//	}
 	@RequestMapping(value = "/MemoBox/find", method = RequestMethod.GET)
 	public ModelAndView find(
 			ModelAndView mav){
