@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8"></meta>
+<title>MemoBox Delete Page</title>
+<style>
+// CSS
+h1 {font-size:18pt; font-weight:bold; color:gray;}
+body {font-size:13pt; color:gray; margin:5px 25px;}
+pre {border: solid 3px #ddd; padding: 10px;}
+tr {margin:5px}
+th {padding:5px;color:white; background:darkgray}
+td {padding:5px; color:black; background:#e0e0ff}
+.right_td {padding: 5px; color: black; background: #e0e0ff; text-align: right}
+.center_td {padding: 5px; color: black; background: #e0e0ff; text-align: center}
+.right_red   {padding: 5px; color: red; background: #e0e0ff; text-align: right}
+.right_blue  {padding: 5px; color: blue; background: #e0e0ff; text-align: right}
+.msg {font-size:15pt; color:green; margin:5px 25px;}
+</style>
+</head>
+<body>
+	<h1 th:text="${title}">DepartmentsCassandra Delete Page</h1>
+	<p class="msg" th:text="${msg}" >please wait ...</p>
+	<hr />
+	<table>
+		<form method="post" action="/DepartmentsCassandra/delete"  th:object="${formModel}">
+		<input type="hidden" name="department_id" th:value="*{department_id}" />
+		<tr>
+			<td><label for="delete">削除</label></td>
+			<!-- <td><input type="text" name="department_id" id="department_id" th:value="*{department_id}"  /></td> -->
+			<td><p th:text="|ID: *{department_id}|"></p></td>
+		</tr>
+		<tr>
+			<td>名前</td>
+			<td><p th:text="|名前: *{department_name}|"></p></td>
+		</tr>
+		<tr><td class="right_blue"></td><td class="right_td"><input type="submit" value="delete" /></td></tr>
+		</form>
+	</table>
+
+	<hr />
+	<pre th:text="${datalist}"></pre>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>名前</th>
+		</tr>
+		<tr th:each="obj : ${datalist}">
+			<td th:text="${obj.department_id}"></td>
+			<td th:text="${obj.department_name}"></td>
+		</tr>
+	</table>
+
+	<script>
+
+	</script>
+</body>
+</html>
