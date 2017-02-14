@@ -20,26 +20,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.cassandra.entity.Departments;
-import com.example.cassandra.entity.Label;
 import com.example.cassandra.entity.Tag;
 import com.example.cassandra.form.EmployeesJOIN;
 import com.example.cassandra.repository.DepartmentsRepository;
-import com.example.cassandra.repository.LabelRepository;
+import com.example.cassandra.repository.TagRepository;
 
 
 /**
- * http://localhost:1598/LabelCassandra
+ * http://localhost:1598/TagCassandra
  *
- * http://localhost:1598/LabelCassandra/form
- * http://localhost:1598/LabelCassandra/find
- * http://localhost:1598/LabelCassandra/edit
- * http://localhost:1598/LabelCassandra/delete
+ * http://localhost:1598/TagCassandra/form
+ * http://localhost:1598/TagCassandra/find
+ * http://localhost:1598/TagCassandra/edit
+ * http://localhost:1598/TagCassandra/delete
  *
  * @author sun
  *
  */
 @Controller
-public class LabelCassandraController {
+public class TagCassandraController {
 
 	@PostConstruct
 	public void init(){
@@ -49,30 +48,30 @@ public class LabelCassandraController {
 	}
 
 	@Autowired
-	private LabelRepository repository;
+	private TagRepository repository;
 
 	@Autowired
 	private DepartmentsRepository repositoryDep;
 
-	@RequestMapping(value = "/LabelCassandra", method = RequestMethod.GET)
+	@RequestMapping(value = "/TagCassandra", method = RequestMethod.GET)
 	public ModelAndView index(
 			ModelAndView mav){
-		mav.setViewName("index_LabelCassandra");
+		mav.setViewName("index_TagCassandra");
 		mav.addObject("title", "Find Page");
-		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Label Register");
-		Iterable<Label> list = repository.findAll();
+		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Tag Register");
+		Iterable<Tag> list = repository.findAll();
 		mav.addObject("datalist", list);
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/LabelCassandraJOIN", method = RequestMethod.GET)
+	@RequestMapping(value = "/TagCassandraJOIN", method = RequestMethod.GET)
 	public ModelAndView indexJOIN(
 			ModelAndView mav){
-		mav.setViewName("index_LabelCassandraJOIN");
+		mav.setViewName("index_TagCassandraJOIN");
 		mav.addObject("title", "Find Page");
 		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Employees Register");
-		Iterable<Label> list = repository.findAll();
+		Iterable<Tag> list = repository.findAll();
 
 		//TODO
 		Iterable<Departments> listDep = repositoryDep.findAll();
@@ -100,24 +99,24 @@ public class LabelCassandraController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/LabelCassandra/form", method = RequestMethod.POST)
+	@RequestMapping(value = "/TagCassandra/form", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView form(
-			@RequestParam("kigyou_cd")       String    kigyouCd,
+			@RequestParam("kigyou_cd")     String kigyouCd,
 			//案01－02の対応
-			@RequestParam("attibute_id") String attibuteId,
-			@RequestParam("label_id")        int       labelId,
-			@RequestParam("label_name")      String    label_name,
-			@RequestParam("color")      String    color,
-			@RequestParam("parent_label_id")  int       parent_label_id,
+			@RequestParam("attibute_id")   String attibuteId,
+			@RequestParam("tag_id")        int    tag_id,
+			@RequestParam("tag_name")      String tag_name,
+			@RequestParam("label_id")      int    label_id,
+			@RequestParam("target_id")     String target_id,
 			ModelAndView mav){
-		Label mydata = new Label();
+		Tag mydata = new Tag();
 		  mydata.setKigyou_cd(kigyouCd);
 		  mydata.setAttibute_id(attibuteId);
-		  mydata.setLabel_id(labelId);
-		  mydata.setLabel_name(label_name);
-		  mydata.setColor(color);
-		  mydata.setParent_label_id(parent_label_id);
+		  mydata.setTag_id(tag_id);
+		  mydata.setTag_name(tag_name);
+		  mydata.setLabel_id(label_id);
+		  mydata.setTarget_id(target_id);
 		  Date datetest = new Date();
 		  mydata.setCreat_datetime(datetest);
 		  mydata.setCreat_user_id("usertest");
@@ -128,62 +127,59 @@ public class LabelCassandraController {
 		  mydata.setDelete_id("0");
 		repository.save(mydata);
 
-
-		return new ModelAndView("redirect:/LabelCassandra");
+		return new ModelAndView("redirect:/TagCassandra");
 	}
 
-	@RequestMapping(value = "/LabelCassandra/find", method = RequestMethod.GET)
+	@RequestMapping(value = "/TagCassandra/find", method = RequestMethod.GET)
 	public ModelAndView find(
 			ModelAndView mav){
-		mav.setViewName("find_LabelCassandra");
+		mav.setViewName("find_TagCassandra");
 		mav.addObject("title", "Find Page");
-		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Label Find");
+		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Tag Find");
 		mav.addObject("value","");
-		List<Label> list = (List<Label>) repository.findAll();
+		List<Tag> list = (List<Tag>) repository.findAll();
 		mav.addObject("datalist", list);
 		return mav;
 	}
 
-	@RequestMapping(value = "/LabelCassandra/find", method = RequestMethod.POST)
+	@RequestMapping(value = "/TagCassandra/find", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView search(
 			@RequestParam("find") String param,
 			ModelAndView mav){
-		mav.setViewName("find_LabelCassandra");
+		mav.setViewName("find_TagCassandra");
 		if( param == ""){
-			mav = new ModelAndView("redirect:/LabelCassandra/find");
+			mav = new ModelAndView("redirect:/TagCassandra/find");
 		}else{
 			mav.addObject("title", "Find Result");
 			mav.addObject("msg", "This Is Result of Search by word " + param);
 			mav.addObject("value",param);
-			List<Label> list = repository.findByLabelName(param);
+			List<Tag> list = repository.findByTagName(param);
 			mav.addObject("datalist", list);
 		}
 		return mav;
 
 	}
 
-	@RequestMapping(value = "/LabelCassandra/editId", method = RequestMethod.POST)
+	@RequestMapping(value = "/TagCassandra/editId", method = RequestMethod.POST)
 	public ModelAndView editId(
-			@RequestParam("kigyou_cd") String kigyouCd,
+			@RequestParam("kigyou_cd") String kigyou_cd,
 			//案01－02の対応
 			@RequestParam("attibute_id") String attibuteId,
-			@RequestParam("label_id") int labelId,
+			@RequestParam("tag_id") int tagId,
 			ModelAndView mav){
-		System.out.println("editId:POST:" + kigyouCd + attibuteId + labelId);
-		mav.setViewName("edit_LabelCassandra");
+		System.out.println("editId:POST:" + kigyou_cd + attibuteId + tagId);
+		mav.setViewName("edit_TagCassandra");
 		mav.addObject("msg", "This Is Sample Spring Boot JPA Model 案１-2 Modify");
-		//Label data = repository.findByLabelId(kigyouCd,labelId);
+		//Tag data = repository.findByTagId(kigyouCd,labelId);
 		//案1－02対応
-		Label data = repository.findByKeys(kigyouCd,attibuteId,labelId);
-		System.out.println("変更前ラベル名：" + data.getLabel_name());
+		Tag data = repository.findByKeys(kigyou_cd,attibuteId,tagId);
+
 		mav.addObject("formModel", data);
-		Iterable<Tag> datalist = repository.findTagsByLabel(labelId);
-		mav.addObject("tagdatalist", datalist);
 		return mav;
 	}
 
-	@RequestMapping(value = "/LabelCassandra/edit/{kigyou_cd,label_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/TagCassandra/edit/{kigyou_cd,label_id}", method = RequestMethod.GET)
 	public ModelAndView edit(
 //			@ModelAttribute("formModel") MyData mydata,
 			@RequestParam("kigyou_cd") String kigyouCd,
@@ -191,34 +187,34 @@ public class LabelCassandraController {
 			@RequestParam("attibute_id") String attibuteId,
 			@PathVariable int labelId,
 			ModelAndView mav){
-		mav.setViewName("edit_LabelCassandra");
-		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Label Modify");
-		Label data = repository.findByKeys(kigyouCd,attibuteId,labelId);
-		System.out.println("変更前ラベル名：" + data.getLabel_name());
+		mav.setViewName("edit_TagCassandra");
+		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Tag Modify");
+		Tag data = repository.findByKeys(kigyouCd,attibuteId,labelId);
+		System.out.println("変更前ラベル名：" + data.getTag_name());
 		mav.addObject("formModel", data);
 		return mav;
 	}
 
-	@RequestMapping(value = "/LabelCassandra/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/TagCassandra/edit", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView update(
 			@RequestParam("kigyou_cd")       String    kigyouCd,
 			//案01－02の対応
-			@RequestParam("attibute_id") String attibuteId,
+			@RequestParam("attibute_id")     String    attibuteId,
+			@RequestParam("tag_id")          int       tagId,
+			@RequestParam("tag_name")        String    tag_name,
 			@RequestParam("label_id")        int       labelId,
-			@RequestParam("label_name")      String    label_name,
-			@RequestParam("color")      String    color,
-			@RequestParam("parent_label_id")  int       parent_label_id,
+			@RequestParam("target_id")       String    target_id,
 			ModelAndView mav){
-		System.out.println("変更後社員名：" + label_name);
-		//Label mydata = repository.findByLabelId(kigyou_cd,label_id);
-		Label mydata = new Label();
+
+		//Tag mydata = repository.findByTagId(kigyou_cd,label_id);
+		Tag mydata = new Tag();
 		  mydata.setKigyou_cd(kigyouCd);
 		  mydata.setAttibute_id(attibuteId);
+		  mydata.setTag_id(tagId);
+		  mydata.setTag_name(tag_name);
 		  mydata.setLabel_id(labelId);
-		  mydata.setLabel_name(label_name);
-		  mydata.setColor(color);
-		  mydata.setParent_label_id(parent_label_id);
+		  mydata.setTarget_id(target_id);
 		  Date datetest = new Date();
 		  mydata.setCreat_datetime(datetest);
 		  mydata.setCreat_user_id("usertest");
@@ -230,62 +226,63 @@ public class LabelCassandraController {
 		repository.save(mydata);
 		 mydata = repository.findByKeys(kigyouCd,attibuteId,labelId);
 		mav.addObject("formModel", mydata);
-		Iterable<Tag> datalist = repository.findTagsByLabel(labelId);
-		mav.addObject("tagdatalist", datalist);
+		Iterable<Tag> datalist = repository.findTagsByTag(labelId);
+		mav.addObject("datalist", datalist);
 
-		return new ModelAndView("redirect:/LabelCassandra");
+		return new ModelAndView("redirect:/TagCassandra");
 	}
 
-	@RequestMapping(value = "/LabelCassandra/deleteId", method = RequestMethod.POST)
+	@RequestMapping(value = "/TagCassandra/deleteId", method = RequestMethod.POST)
 	public ModelAndView deleteId(
 			@RequestParam("kigyou_cd") String kigyou_cd,
 			//案01－02の対応
 			@RequestParam("attibute_id") String attibuteId,
-			@RequestParam("label_id") int label_id,
+			@RequestParam("tag_id") int tag_id,
 			ModelAndView mav){
-		System.out.println("deleteId:POST:" + label_id);
+		System.out.println("deleteId:POST:" + tag_id);
 		System.out.println("削除予定：");
-		mav.setViewName("delete_LabelCassandra");
-		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Label Delete");
+		mav.setViewName("delete_TagCassandra");
+		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Tag Delete");
 		//Label data = repository.findByLabelId(kigyou_cd,label_id);
 		/* 案1－02対応:*/
-		Label mydata = repository.findByKeys(kigyou_cd,attibuteId,label_id);
-		System.out.println("削除予定ID：" + mydata.getLabel_id());
+		Tag mydata = repository.findByKeys(kigyou_cd,attibuteId,tag_id);
+		System.out.println("削除予定ID：" + mydata.getTag_id());
 		mav.addObject("formModel", mydata);
 		return mav;
 	}
 
-	@RequestMapping(value = "/LabelCassandra/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/TagCassandra/delete", method = RequestMethod.GET)
 	public ModelAndView delete(
 			ModelAndView mav){
-		mav.setViewName("delete_LabelCassandra");
+		mav.setViewName("delete_TagCassandra");
 		mav.addObject("title", "Delete Page");
-		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Label Delete");
+		mav.addObject("msg", "This Is Sample Spring Boot JPA Model Tag Delete");
 		mav.addObject("value","");
-		List<Label> list = (List<Label>) repository.findAll();
+		List<Tag> list = (List<Tag>) repository.findAll();
 		mav.addObject("datalist", list);
 		return mav;
 	}
 
-	@RequestMapping(value = "/LabelCassandra/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/TagCassandra/delete", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView remove(
 			@RequestParam("kigyou_cd")   String  kigyou_cd,
 			@RequestParam("attibute_id") String attibuteId,
-			@RequestParam("label_id") int label_id,
+			@RequestParam("tag_id") int tag_id,
 			ModelAndView mav){
-		System.out.println("remove id:" + label_id);
-		mav.setViewName("index_LabelCassandra");
-		if( label_id == 0){
-			mav = new ModelAndView("redirect:/LabelCassandra/delete");
+		System.out.println("remove id:" + tag_id);
+		mav.setViewName("index_TagCassandra");
+		if( tag_id == 0){
+			mav = new ModelAndView("redirect:/TagCassandra/delete");
 		}else{
 			mav.addObject("title", "Find Result");
-			mav.addObject("msg", "This Is Result of Delete by word " + label_id);
+			mav.addObject("msg", "This Is Result of Delete by word " + tag_id);
 			mav.addObject("kigyou_cd",kigyou_cd);
-			mav.addObject("label_id",label_id);
-			List<Label> list = repository.deleteByLabelId(kigyou_cd,attibuteId,label_id);
+			mav.addObject("attibute_id",attibuteId);
+			mav.addObject("tag_id",tag_id);
+			List<Tag> list = repository.deleteByTagId(kigyou_cd,attibuteId,tag_id);
 			mav.addObject("datalist", list);
-			mav = new ModelAndView("redirect:/LabelCassandra");
+			mav = new ModelAndView("redirect:/TagCassandra");
 		}
 		return mav;
 	}
