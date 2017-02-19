@@ -19,11 +19,11 @@ td {padding:5px; color:black; background:#e0e0ff}
 </style>
 </head>
 <body>
-	<h1 th:text="#{content.title.cassandra}">LabelCassandra Page</h1>
+	<h1 th:text="#{content.title.cassandra}">TagCassandra Page</h1>
 	<p class="msg" th:text="${msg}" >please wait ...</p>
 	<hr />
 	<table>
-		<form method="post" action="/LabelCassandra/form" >
+		<form method="post" action="/TagCassandra/form" >
 		<tr>
 			<td><label for="kigyou_cd">企業ID</label></td>
 			<td><input type="text" name="kigyou_cd" id="kigyou_cd" /></td>
@@ -33,20 +33,20 @@ td {padding:5px; color:black; background:#e0e0ff}
 			<td><input type="text" name="attibute_id" id="attibute_id" th:value="*{attibute_id}"  /></td>
 		</tr>
 		<tr>
+			<td><label for="tag_id">タグID</label></td>
+			<td><input type="text" name="tag_id" id="tagl_id" th:value="*{tag_id}"  /></td>
+		</tr>
+		<tr>
+			<td><label for="tag_name">ラベル名</label></td>
+			<td><input type="text" name="tag_name" id="tag_name" th:value="*{tag_name}"  /></td>
+		</tr>
+		<tr>
 			<td><label for="label_id">ラベルID</label></td>
 			<td><input type="text" name="label_id" id="label_id" th:value="*{label_id}"  /></td>
 		</tr>
-		<tr>
-			<td><label for="label_name">ラベル名</label></td>
-			<td><input type="text" name="label_name" id="label_name" th:value="*{label_name}"  /></td>
-		</tr>
-		<tr>
-			<td><label for="color">ラベルカラー</label></td>
-			<td><input type="text" name="color" id="color" th:value="*{color}"  /></td>
-		</tr>
-		<tr>
-			<td><label for="parent_label_id">親ラベルID</label></td>
-			<td><input type="text" name="parent_label_id" id="parent_label_id" th:value="*{parent_label_id}"  /></td>
+         <tr>
+			<td><label for="target_id">紐づくID</label></td>
+			<td><input type="text" name="target_id" id="target_id" th:value="*{target_id}"  /></td>
 		</tr>
 
 
@@ -55,46 +55,9 @@ td {padding:5px; color:black; background:#e0e0ff}
 	</table>
 
 	<hr />
-	<pre th:text="${datalist}"></pre>
-	<table>
-		<tr>
-		    <th>企業ID</th>
-		    <th>属性ID</th>
-			<th>ラベルID</th>
-			<th>ラベル名</th>
-			<th>ラベルカラー</th>
-			<th>親ラベルID</th>
-
-		</tr>
-		<tr th:each="obj : ${datalist}">
-			<td th:text="${obj.kigyou_cd}"></td>
-			<td th:text="${obj.attibute_id}"></td>
-			<td th:text="${obj.label_id}"></td>
-			<td th:text="${obj.label_name}"></td>
-			<td th:text="${obj.color}"></td>
-			<td th:text="${obj.parent_label_id}"></td>
-
-			<td>
-				<form method="post" action="/LabelCassandra/editId" >
-	            	<input type="hidden" name="kigyou_cd" th:value="${obj.kigyou_cd}" />
-	            	<input type="hidden" name="attibute_id" th:value="${obj.attibute_id}" />
-					<input type="hidden" name="label_id" th:value="${obj.label_id}" />
-					<input type="submit" value="edit" />
-				</form>
-			</td>
-			<td>
-				<form method="post" action="/LabelCassandra/deleteId" >
-					<input type="hidden" name="kigyou_cd" th:value="${obj.kigyou_cd}" />
-					<input type="hidden" name="attibute_id" th:value="${obj.attibute_id}" />
-					<input type="hidden" name="label_id" th:value="${obj.label_id}" />
-					<input type="submit" value="delete" />
-				</form>
-			</td>
-		</tr>
-	</table>
 
     <P>タグ付け情報</P>
-	<pre th:text="${tagdatalist}"></pre>
+	<pre th:text="${datalist}"></pre>
 	<table>
 		<tr>
 		    <th>企業ID</th>
@@ -105,13 +68,29 @@ td {padding:5px; color:black; background:#e0e0ff}
 			<th>紐づく情報</th>
 
 		</tr>
-		<tr th:each="obj : ${tagdatalist}">
+		<tr th:each="obj : ${datalist}">
 			<td th:text="${obj.kigyou_cd}"></td>
 			<td th:text="${obj.attibute_id}"></td>
 			<td th:text="${obj.tag_id}"></td>
 			<td th:text="${obj.tag_name}"></td>
 			<td th:text="${obj.label_id}"></td>
 			<td th:text="${obj.target_id}"></td>
+			<td>
+				<form method="post" action="/TagCassandra/editId" >
+	            	<input type="hidden" name="kigyou_cd" th:value="${obj.kigyou_cd}" />
+	            	<input type="hidden" name="attibute_id" th:value="${obj.attibute_id}" />
+					<input type="hidden" name="tag_id" th:value="${obj.tag_id}" />
+					<input type="submit" value="edit" />
+				</form>
+			</td>
+			<td>
+				<form method="post" action="/TagCassandra/deleteId" >
+					<input type="hidden" name="kigyou_cd" th:value="${obj.kigyou_cd}" />
+					<input type="hidden" name="attibute_id" th:value="${obj.attibute_id}" />
+					<input type="hidden" name="tag_id" th:value="${obj.tag_id}" />
+					<input type="submit" value="delete" />
+				</form>
+			</td>
 		</tr>
 	</table>
 	<script>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="UTF-8"></meta>
-<title>MemoBox Delete Page</title>
+<title>MemoBox Edit Page</title>
 <style>
 // CSS
 h1 {font-size:18pt; font-weight:bold; color:gray;}
@@ -19,34 +19,34 @@ td {padding:5px; color:black; background:#e0e0ff}
 </style>
 </head>
 <body>
-	<h1 th:text="${title}">LabelCassandra delete Page</h1>
+	<h1 th:text="${title}">LabelCassandra Edit Page</h1>
 	<p class="msg" th:text="${msg}" >please wait ...</p>
 	<hr />
 	<table>
-		<form method="post" action="/LabelCassandra/delete"  th:object="${formModel}" >
+		<form method="post" action="/TagCassandra/edit"  th:object="${formModel}" >
 		<tr>
 			<td><label for="kigyou_cd">企業ID</label></td>
-			<td><input type="text" name="kigyou_cd" id="kigyou_cd" th:value="*{kigyou_cd}"  /></td>
+			<td><input type="text" name="kigyou_cd" id="kigyou_cd" th:value="*{kigyou_cd}" /></td>
 		</tr>
-	　　<tr>
+        <tr>
 			<td><label for="attibute_id">属性ID</label></td>
 			<td><input type="text" name="attibute_id" id="attibute_id" th:value="*{attibute_id}"  /></td>
+		</tr>
+		<tr>
+			<td><label for="tag_id">タグID</label></td>
+			<td><input type="text" name="tag_id" id="tagl_id" th:value="*{tag_id}"  /></td>
+		</tr>
+		<tr>
+			<td><label for="tag_name">ラベル名</label></td>
+			<td><input type="text" name="tag_name" id="tag_name" th:value="*{tag_name}"  /></td>
 		</tr>
 		<tr>
 			<td><label for="label_id">ラベルID</label></td>
 			<td><input type="text" name="label_id" id="label_id" th:value="*{label_id}"  /></td>
 		</tr>
-		<tr>
-			<td><label for="label_name">ラベル名</label></td>
-			<td><input type="text" name="label_name" id="label_name" th:value="*{label_name}"  /></td>
-		</tr>
-		<tr>
-			<td><label for="color">ラベルカラー</label></td>
-			<td><input type="text" name="color" id="color" th:value="*{color}"  /></td>
-		</tr>
-		<tr>
-			<td><label for="parent_label_id">親ラベルID</label></td>
-			<td><input type="text" name="parent_label_id" id="parent_label_id" th:value="*{parent_label_id}"  /></td>
+         <tr>
+			<td><label for="target_id">紐づくID</label></td>
+			<td><input type="text" name="target_id" id="target_id" th:value="*{target_id}"  /></td>
 		</tr>
 
 		<tr><td class="right_blue"></td><td class="right_td"><input type="submit"  /></td></tr>
@@ -54,22 +54,25 @@ td {padding:5px; color:black; background:#e0e0ff}
 	</table>
 
 	<hr />
+	<P>タグ付け情報</P>
 	<pre th:text="${datalist}"></pre>
 	<table>
 		<tr>
-			<th>企業ID</th>
-			<th>属性ID</th>
+		    <th>企業ID</th>
+		    <th>属性ID</th>
+			<th>タグID</th>
+			<th>タグ名</th>
 			<th>ラベルID</th>
-			<th>ラベル名</th>
-			<th>ラベルカラー</th>
+			<th>紐づく情報</th>
+
 		</tr>
 		<tr th:each="obj : ${datalist}">
 			<td th:text="${obj.kigyou_cd}"></td>
 			<td th:text="${obj.attibute_id}"></td>
+			<td th:text="${obj.tag_id}"></td>
+			<td th:text="${obj.tag_name}"></td>
 			<td th:text="${obj.label_id}"></td>
-			<td th:text="${obj.label_name}"></td>
-			<td th:text="${obj.color}"></td>
-			<td th:text="${obj.parent_label_id}"></td>
+			<td th:text="${obj.target_id}"></td>
 		</tr>
 	</table>
 	<script>

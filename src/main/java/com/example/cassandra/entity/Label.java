@@ -13,11 +13,34 @@ public class Label {
 	@PrimaryKeyColumn(name = "kigyou_cd", ordinal = 1, type = PrimaryKeyType.PARTITIONED)
 	private String kigyou_cd;
 
+	@PrimaryKeyColumn(name = "attibute_id", ordinal = 1, type = PrimaryKeyType.PARTITIONED)
+	private String attibute_id;
+
+
 	@PrimaryKeyColumn(name = "label_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
 	private int label_id;
 
 	@Column(value = "label_name")
 	private String label_name;
+
+	public String getAttibute_id() {
+		return attibute_id;
+	}
+
+	public void setAttibute_id(String attibute_id) {
+		this.attibute_id = attibute_id;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	@Column(value = "color")
+	private String color;
 
 	@Column(value = "parent_label_id")
 	private int parent_label_id;
@@ -47,12 +70,14 @@ public class Label {
 
 	}
 
-	public Label(String kigyou_cd, int label_id, String label_name, int parent_label_id, Date creat_datetime,
+	public Label(String kigyou_cd, String attibute_id,int label_id, String label_name, String color,int parent_label_id, Date creat_datetime,
 			String creat_user_id, String update_user_id, Date update_datetime, String ui_assemb_id,
 			String server_assemb_id, String delete_id) {
 		this.kigyou_cd = kigyou_cd;
+		this.attibute_id = attibute_id;
 		this.label_id = label_id;
 		this.label_name = label_name;
+		this.color=color;
 		this.parent_label_id = parent_label_id;
 		this.creat_datetime = creat_datetime;
 		this.creat_user_id = creat_user_id;
